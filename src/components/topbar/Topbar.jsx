@@ -5,7 +5,7 @@ export default function Topbar() {
   return (
     <div className='topbarContainer'>
       <div className='topbarLeft'>
-        <span className='logo'>Nexus</span>
+        <span className='logo'>NexSocial</span>
       </div>
       <div className='topbarCenter'>
         <div className='searchBar'>
