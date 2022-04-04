@@ -1,7 +1,8 @@
 import './rightbar.css';
 import { Users } from '../../dummyData';
 import Online from '../online/Online';
-export default function Rightbar({ profile }) {
+export default function Rightbar({ user }) {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const HomeRightBar = () => {
     return (
       <>
@@ -29,15 +30,21 @@ export default function Rightbar({ profile }) {
         <div className='rightbarInfo'>
           <div className='rightbarInfoItem'>
             <span className='rightbarInfoKey'>City:</span>
-            <span className='rightbarInfoValue'>Cahul</span>
+            <span className='rightbarInfoValue'>{user.city}</span>
           </div>
           <div className='rightbarInfoItem'>
             <span className='rightbarInfoKey'>Country:</span>
-            <span className='rightbarInfoValue'>Moldova</span>
+            <span className='rightbarInfoValue'>{user.from}</span>
           </div>
           <div className='rightbarInfoItem'>
             <span className='rightbarInfoKey'>Relationship:</span>
-            <span className='rightbarInfoValue'>Complicated</span>
+            <span className='rightbarInfoValue'>
+              {user.relationship === 1
+                ? 'Single'
+                : user.relationship === 2
+                ? 'Married'
+                : '-'}
+            </span>
           </div>
         </div>
         <h4 className='rightbarTitle'>User friends</h4>
@@ -45,50 +52,10 @@ export default function Rightbar({ profile }) {
           <div className='rightbarFollowing'>
             <img
               className='rightbarFollowingImg'
-              src='assets/person/1.jpg'
+              src={`${PF}person/1.jpg`}
               alt=''
             />
-            <span className='rightbarFollowingnName'>Oleg Kizaru</span>
-          </div>
-          <div className='rightbarFollowing'>
-            <img
-              className='rightbarFollowingImg'
-              src='assets/person/1.jpg'
-              alt=''
-            />
-            <span className='rightbarFollowingnName'>Oleg Kizaru</span>
-          </div>
-          <div className='rightbarFollowing'>
-            <img
-              className='rightbarFollowingImg'
-              src='assets/person/2.jpg'
-              alt=''
-            />
-            <span className='rightbarFollowingnName'>Oleg Kizaru</span>
-          </div>
-          <div className='rightbarFollowing'>
-            <img
-              className='rightbarFollowingImg'
-              src='assets/person/3.jpg'
-              alt=''
-            />
-            <span className='rightbarFollowingnName'>Oleg Kizaru</span>
-          </div>
-          <div className='rightbarFollowing'>
-            <img
-              className='rightbarFollowingImg'
-              src='assets/person/2.jpg'
-              alt=''
-            />
-            <span className='rightbarFollowingnName'>Oleg Kizaru</span>
-          </div>
-          <div className='rightbarFollowing'>
-            <img
-              className='rightbarFollowingImg'
-              src='assets/person/3.jpg'
-              alt=''
-            />
-            <span className='rightbarFollowingnName'>Oleg Kizaru</span>
+            <span className='rightbarFollowingName'>Oleg Kizaru</span>
           </div>
         </div>
       </>
@@ -97,7 +64,7 @@ export default function Rightbar({ profile }) {
   return (
     <div className='rightBar'>
       <div className='rightbarWrapper'>
-        {profile ? <ProfileRightBar /> : <HomeRightBar />}
+        {user ? <ProfileRightBar /> : <HomeRightBar />}
       </div>
     </div>
   );

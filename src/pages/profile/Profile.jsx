@@ -3,8 +3,20 @@ import Topbar from '../../components/topbar/Topbar';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Rightbar from '../../components/rightbar/Rightbar';
 import Feed from '../../components/feed/Feed';
+import { useEffect, useState } from 'react';
+import { axiosApi } from '../../network';
 
 export default function Profile() {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await axiosApi.get(`/users?username=maxim`);
+      setUser(res.data);
+    };
+    fetchUser();
+  }, []);
   return (
     <>
       <Topbar />
@@ -15,23 +27,23 @@ export default function Profile() {
             <div className='profileCover'>
               <img
                 className='profileCoverImg'
-                src='assets/post/3.webp'
+                src={user.coverPicture || PF + '/noCover.webp'}
                 alt=''
               />
               <img
                 className='profileUserImg'
-                src='assets/person/2.jpg'
+                src={user.profilePicture || PF + '/person/noAvatar.png'}
                 alt=''
               />
             </div>
             <div className='profileInfo'>
-              <h4 className='profileInfoName'>Maximka</h4>
-              <span className='profileInfoDesc'>hello there</span>
+              <h4 className='profileInfoName'>{user.username}</h4>
+              <span className='profileInfoDesc'>{user.desc}</span>
             </div>
           </div>
           <div className='profileRightBottom'>
-            <Feed />
-            <Rightbar profile />
+            <Feed username='maxim' />
+            <Rightbar user={user} />
           </div>
         </div>
       </div>

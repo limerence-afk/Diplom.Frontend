@@ -3,13 +3,13 @@ import './register.css';
 export default function Register() {
   return (
     <div className='login'>
-      <div className='loginWrapper'>
-        <div className='loginLeft'>
+      <div className='registerWrapper'>
+        <div className='registerLeft'>
           <h3 className='loginLogo'> NexSocial</h3>
           <span className='loginDesc'>Keep in touch with friends</span>
         </div>
-        <div className='loginRight'>
-          <div className='loginBox'>
+        <div className='registerRight'>
+          <div className='registerBox'>
             <input placeholder='Username' className='loginInput' />
             <input placeholder='email' className='loginInput' />
             <input placeholder='Password' className='loginInput' />
