@@ -5,18 +5,20 @@ import Rightbar from '../../components/rightbar/Rightbar';
 import Feed from '../../components/feed/Feed';
 import { useEffect, useState } from 'react';
 import { axiosApi } from '../../network';
+import { useParams } from 'react-router';
 
 export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [user, setUser] = useState({});
+  const username = useParams().username;
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axiosApi.get(`/users?username=maxim`);
+      const res = await axiosApi.get(`/users?username=${username}`);
       setUser(res.data);
     };
     fetchUser();
-  }, []);
+  }, [username]);
   return (
     <>
       <Topbar />
@@ -27,12 +29,20 @@ export default function Profile() {
             <div className='profileCover'>
               <img
                 className='profileCoverImg'
-                src={user.coverPicture || PF + '/noCover.webp'}
+                src={
+                  user.coverPicture
+                    ? PF + user.coverPicture
+                    : PF + '/noCover.webp'
+                }
                 alt=''
               />
               <img
                 className='profileUserImg'
-                src={user.profilePicture || PF + '/person/noAvatar.png'}
+                src={
+                  user.profilePicture
+                    ? PF + user.profilePicture
+                    : PF + '/person/noAvatar.png'
+                }
                 alt=''
               />
             </div>
@@ -42,7 +52,7 @@ export default function Profile() {
             </div>
           </div>
           <div className='profileRightBottom'>
-            <Feed username='maxim' />
+            <Feed username={username} />
             <Rightbar user={user} />
           </div>
         </div>
