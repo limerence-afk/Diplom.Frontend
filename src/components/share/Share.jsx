@@ -7,19 +7,27 @@ import { useContext, useRef, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { axiosApi } from '../../network';
 
-export default function Share() {
+export default function Share({ addPost }) {
   const { user } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const desc = useRef();
   const [file, setFile] = useState(null);
+
   const submitHandler = async (e) => {
     e.preventDefault();
     const newPost = {
       userId: user._id,
       desc: desc.current.value,
     };
+    if (file) {
+      const data = new FormData();
+      data.append('file', file);
+      const uploadedFileRes = await axiosApi.post('/posts/upload', data);
+      newPost.img = uploadedFileRes.data.url;
+    }
     try {
-      await axiosApi.post('/posts', newPost);
+      const newPostRes = await axiosApi.post('/posts', newPost);
+      addPost(newPostRes.data);
     } catch (err) {}
   };
 

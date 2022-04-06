@@ -9,6 +9,10 @@ export default function Feed({ username }) {
   const [posts, setPosts] = useState([]);
   const { user } = useContext(AuthContext);
 
+  function addPost(post) {
+    setPosts([post, ...posts]);
+  }
+
   useEffect(() => {
     const fetchPosts = async () => {
       const res = username
@@ -21,7 +25,8 @@ export default function Feed({ username }) {
   return (
     <div className='feed'>
       <div className='feedWrapper'>
-        <Share />
+        <Share addPost={addPost} />
+
         {posts.map((p) => (
           <Post key={p._id} post={p} />
         ))}
