@@ -6,6 +6,7 @@ import RoomIcon from '@mui/icons-material/Room';
 import { useContext, useRef, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { axiosApi } from '../../network';
+import { Cancel } from '@mui/icons-material';
 
 export default function Share({ addPost }) {
   const { user } = useContext(AuthContext);
@@ -51,6 +52,12 @@ export default function Share({ addPost }) {
           />
         </div>
         <hr className='shareHr' />
+        {file && (
+          <div className='shareImageContainer'>
+            <img className='shareImg' src={URL.createObjectURL(file)} alt='' />
+            <Cancel className='shareCancelImg' onClick={() => setFile(null)} />
+          </div>
+        )}
         <form className='shareBottom' onSubmit={submitHandler}>
           <div className='shareOptions'>
             <label htmlFor='file' className='shareOption'>
