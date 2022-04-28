@@ -28,6 +28,8 @@ export default function Share({ addPost }) {
     }
     try {
       const newPostRes = await axiosApi.post('/posts', newPost);
+      desc.current.value = '';
+      setFile(null);
       addPost(newPostRes.data);
     } catch (err) {}
   };

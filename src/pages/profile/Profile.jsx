@@ -30,9 +30,7 @@ export default function Profile() {
               <img
                 className='profileCoverImg'
                 src={
-                  user.coverPicture
-                    ? PF + user.coverPicture
-                    : PF + '/noCover.webp'
+                  user.coverPicture ? user.coverPicture : PF + '/noCover.webp'
                 }
                 alt=''
               />
@@ -40,7 +38,7 @@ export default function Profile() {
                 className='profileUserImg'
                 src={
                   user.profilePicture
-                    ? PF + user.profilePicture
+                    ? user.profilePicture
                     : PF + '/person/noAvatar.png'
                 }
                 alt=''
