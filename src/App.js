@@ -11,6 +11,7 @@ import Profile from './pages/profile/Profile';
 import Login from './pages/login/Login';
 import { useContext } from 'react';
 import { AuthContext } from './context/AuthContext';
+import Messenger from './pages/messenger/Messenger';
 
 function RequireAuth({ children }) {
   const { user } = useContext(AuthContext);
@@ -46,6 +47,14 @@ function App() {
             }
           />
           <Route path='*' element={<Navigate to='/' replace />} />
+          <Route
+            path='/messenger'
+            element={
+              <RequireAuth>
+                <Messenger />
+              </RequireAuth>
+            }
+          />
         </Routes>
       </Router>
     </>

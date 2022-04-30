@@ -14,6 +14,8 @@ export default function Share({ addPost }) {
   const desc = useRef();
   const [file, setFile] = useState(null);
 
+  console.log(user);
+
   const submitHandler = async (e) => {
     e.preventDefault();
     const newPost = {
@@ -42,7 +44,7 @@ export default function Share({ addPost }) {
             className='shareProfileImg'
             src={
               user.profilePicture
-                ? PF + user.profilePicture
+                ? user.profilePicture
                 : PF + 'person/noAvatar.png'
             }
             alt=''
