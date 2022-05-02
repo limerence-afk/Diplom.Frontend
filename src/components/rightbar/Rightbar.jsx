@@ -1,14 +1,11 @@
 import './rightbar.css';
 import { Users } from '../../dummyData';
 import Online from '../online/Online';
-import { useEffect } from 'react';
+import { useEffect, useContext, useState, useMemo } from 'react';
 import { axiosApi } from '../../network';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { Add, Remove } from '@mui/icons-material';
-import { useMemo } from 'react';
 
 export default function Rightbar({ user }) {
   const { user: currentUser, dispatch } = useContext(AuthContext);

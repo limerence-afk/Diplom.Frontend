@@ -1,10 +1,9 @@
 import './topbar.css';
-import { Search, Person, Chat, Notifications } from '@mui/icons-material';
+import { Search, Person, Chat } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { logout } from '../../ApiCalls';
 
 export default function Topbar() {
   const { user } = useContext(AuthContext);
@@ -13,7 +12,7 @@ export default function Topbar() {
 
   const handleLogOut = () => {
     try {
-      logout(dispatch);
+      dispatch({ type: 'LOG_OUT' });
     } catch (err) {
       console.log(err);
     }
