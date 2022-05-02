@@ -6,6 +6,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import { Users } from '../../dummyData';
 import CloseFriend from '../closeFriend/CloseFriend';
+import { Link } from 'react-router-dom';
 export default function Sidebar() {
   return (
     <div className='sideBar'>
@@ -15,10 +16,21 @@ export default function Sidebar() {
             <DynamicFeedIcon className='sidebarIcon' />
             <span className='sidebarListItemText'> Feed</span>
           </li>
-          <li className='sidebarListItem'>
-            <ChatIcon className='sidebarIcon' />
-            <span className='sidebarListItemText'> Chats</span>
-          </li>
+          <Link to='/messenger/'>
+            <li className='sidebarListItem'>
+              <ChatIcon
+                className='sidebarIcon'
+                style={{ textDecoration: 'none' }}
+              />
+              <span
+                className='sidebarListItemText'
+                style={{ textDecoration: 'none' }}
+              >
+                {' '}
+                Chats
+              </span>
+            </li>
+          </Link>
           <li className='sidebarListItem'>
             <PeopleIcon className='sidebarIcon' />
             <span className='sidebarListItemText'> Groups</span>

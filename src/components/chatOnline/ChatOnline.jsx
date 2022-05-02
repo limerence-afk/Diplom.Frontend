@@ -1,19 +1,50 @@
+import { useEffect, useState } from 'react';
+import { axiosApi } from '../../network';
 import './chatOnline.css';
 
-export default function ChatOnline() {
+export default function ChatOnline({ onlineUsers, currentId, setCurrentChat }) {
+  const [friends, setFriends] = useState([]);
+  const [onlineFriends, setOnlineFriends] = useState([]);
+
+  useEffect(() => {
+    const getFriends = async () => {
+      const res = await axiosApi.get('/users/friends/' + currentId);
+      setFriends(res.data);
+    };
+
+    getFriends();
+  }, [currentId]);
+
+  useEffect(() => {
+    setOnlineFriends(friends.filter((f) => onlineUsers.includes(f._id)));
+  }, [friends, onlineUsers]);
+
+  const handleClick = async (user) => {
+    try {
+      const res = await axiosApi.get(
+        `/conversations/find/${currentId}/${user._id}`
+      );
+      setCurrentChat(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  console.log(onlineFriends);
   return (
     <div className='chatOnline'>
-      <div className='chatOnlineFriend'>
-        <div className='chatOnlineImgContainer'>
-          <img
-            className='chatOnlineImg'
-            src='https://firebasestorage.googleapis.com/v0/b/diplom-3bd32.appspot.com/o/posts%2F3a91a7e6-389e-452c-8e51-3a5f7a68b8f6.jpg?alt=media&token=e2a68571-ce05-494c-805d-fdf337ae2d54'
-            alt=''
-          />
-          <div className='chatOnlineBadge'></div>
+      {onlineFriends.map((o) => (
+        <div
+          className='chatOnlineFriend'
+          // key={o._id}
+          onClick={() => handleClick(o)}
+        >
+          <div className='chatOnlineImgContainer'>
+            <img className='chatOnlineImg' src={o.profilePicture} alt='' />
+            <div className='chatOnlineBadge'></div>
+          </div>
+          <span className='chatOnlineName'>{o.username}</span>
         </div>
-        <span className='chatOnlineName'>Kekw</span>
-      </div>
+      ))}
     </div>
   );
 }

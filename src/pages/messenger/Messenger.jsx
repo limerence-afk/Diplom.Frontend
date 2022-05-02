@@ -9,13 +9,15 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { axiosApi } from '../../network';
 import { io } from 'socket.io-client';
-
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 export default function Messenger() {
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+
   const socket = useRef();
   const { user } = useContext(AuthContext);
   const scrollRef = useRef();
@@ -40,7 +42,9 @@ export default function Messenger() {
   useEffect(() => {
     socket.current.emit('addUser', user._id);
     socket.current.on('getUsers', (users) => {
-      console.log(users);
+      setOnlineUsers(
+        user.followings.filter((f) => users.some((u) => u.userId === f))
+      );
     });
   }, [user]);
 
@@ -97,13 +101,25 @@ export default function Messenger() {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  const handleBack = () => {
+    setCurrentChat();
+  };
+
   return (
     <>
       <Topbar />
       <div className='messenger'>
         <div className='chatMenu'>
           <div className='chatMenuWrapper'>
-            <input placeholder='Search for friends' className='chatMenuInput' />
+            <div className='backAndSearch'>
+              <input
+                placeholder='Search for friends'
+                className='chatMenuInput'
+              />
+              <div className='backIcon' onClick={handleBack}>
+                <ArrowBackIosIcon />
+              </div>
+            </div>
             {conversations.map((c) => (
               <div key={c._id} onClick={() => setCurrentChat(c)}>
                 <Conversation conversation={c} key={c._id} currentUser={user} />
@@ -147,7 +163,11 @@ export default function Messenger() {
         </div>
         <div className='chatOnline'>
           <div className='chatOnlineWrapper'>
-            <ChatOnline />
+            <ChatOnline
+              onlineUsers={onlineUsers}
+              currentId={user._id}
+              setCurrentChat={setCurrentChat}
+            />
           </div>
         </div>
       </div>

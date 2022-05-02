@@ -54,8 +54,6 @@ export default function Topbar() {
             disabled={isFetching}
           >
             <LogoutIcon />
-
-            <span className='topbarIconBadge'>1</span>
           </div>
         </div>
         <Link to={`/profile/${user.username}`}>
