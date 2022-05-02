@@ -135,12 +135,12 @@ const HomeRightBar = () => {
         </span>
       </div>
       <img className='rightbarAd' src='/assets/ad.jpg' alt='' />
-      <h4 className='rightbarTitle'>Friends Online</h4>
+      {/* <h4 className='rightbarTitle'>Friends Online</h4>
       <ul className='rightbarFriendList'>
         {Users.map((u) => (
           <Online key={u.id} user={u} />
         ))}
-      </ul>
+      </ul> */}
     </>
   );
 };

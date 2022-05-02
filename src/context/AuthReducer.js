@@ -25,6 +25,13 @@ const AuthReducer = (state, action) => {
         isFetching: false,
         error: false,
       };
+    case 'USER_CHANGE':
+      localStorage.setItem('user', action.payload);
+      return {
+        user: action.payload,
+        isFetching: false,
+        error: false,
+      };
     case 'FOLLOW':
       return {
         ...state,

@@ -104,7 +104,7 @@ export default function Messenger() {
   const handleBack = () => {
     setCurrentChat();
   };
-
+  console.log(conversations);
   return (
     <>
       <Topbar />
@@ -122,7 +122,7 @@ export default function Messenger() {
             </div>
             {conversations.map((c) => (
               <div key={c._id} onClick={() => setCurrentChat(c)}>
-                <Conversation conversation={c} key={c._id} currentUser={user} />
+                <Conversation conversation={c} currentUser={user} />
               </div>
             ))}
           </div>
@@ -166,7 +166,7 @@ export default function Messenger() {
             <ChatOnline
               onlineUsers={onlineUsers}
               currentId={user._id}
-              setCurrentChat={setCurrentChat}
+              setConversations={setConversations}
             />
           </div>
         </div>

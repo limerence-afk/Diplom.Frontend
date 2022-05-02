@@ -7,7 +7,24 @@ import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import { Users } from '../../dummyData';
 import CloseFriend from '../closeFriend/CloseFriend';
 import { Link } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { axiosApi } from '../../network';
 export default function Sidebar() {
+  const { user } = useContext(AuthContext);
+  const [friends, setFriends] = useState([]);
+  useEffect(() => {
+    const getFriends = async () => {
+      try {
+        if (!user._id) return;
+        const friendList = await axiosApi.get('/users/friends/' + user._id);
+        setFriends(friendList.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getFriends();
+  }, [user._id]);
   return (
     <div className='sideBar'>
       <div className='sidebarWrapper'>
@@ -50,8 +67,8 @@ export default function Sidebar() {
         <button className='sidebarButton'>Show more...</button>
         <hr className='sidebarHr' />
         <ul className='sidebarFriendsList'>
-          {Users.map((u) => (
-            <CloseFriend key={u.id} user={u} />
+          {friends.map((u) => (
+            <CloseFriend key={u._id} user={u} />
           ))}
         </ul>
       </div>

@@ -50,4 +50,9 @@
   font-weight: 500;
   background-color: #1778f2;
   color: white;
+  cursor: pointer;
+}
+
+.chngImgForm{
+  margin-top: 20px;
 }
