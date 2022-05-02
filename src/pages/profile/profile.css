@@ -40,3 +40,14 @@
 .profileRightBottom {
   display: flex;
 }
+
+.changeImg{
+  margin-top: 10px;
+  width: 200px;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: 500;
+  background-color: #1778f2;
+  color: white;
+}

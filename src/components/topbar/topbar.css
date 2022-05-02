@@ -60,11 +60,14 @@
 }
 .topbarIcons {
   display: flex;
+
+  
 }
 .topbarItemIcon {
   margin-right: 15px;
   cursor: pointer;
   position: relative;
+ 
 }
 .topbarIconBadge {
   width: 15px;

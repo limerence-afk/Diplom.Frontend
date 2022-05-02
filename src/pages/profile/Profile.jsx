@@ -44,9 +44,11 @@ export default function Profile() {
                 alt=''
               />
             </div>
+
             <div className='profileInfo'>
               <h4 className='profileInfoName'>{user.username}</h4>
               <span className='profileInfoDesc'>{user.desc}</span>
+              <button className='changeImg'>Change profile image</button>
             </div>
           </div>
           <div className='profileRightBottom'>

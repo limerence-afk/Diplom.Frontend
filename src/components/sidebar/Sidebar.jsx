@@ -16,7 +16,10 @@ export default function Sidebar() {
             <DynamicFeedIcon className='sidebarIcon' />
             <span className='sidebarListItemText'> Feed</span>
           </li>
-          <Link to='/messenger/'>
+          <Link
+            to='/messenger/'
+            style={{ textDecoration: 'none', color: 'inherit' }}
+          >
             <li className='sidebarListItem'>
               <ChatIcon
                 className='sidebarIcon'

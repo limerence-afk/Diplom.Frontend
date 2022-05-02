@@ -35,19 +35,15 @@ export default function Topbar() {
         </div>
       </div>
       <div className='topbarRight'>
-        <div className='topbarLink'>
-          <span className='topbarLink'>Homepage</span>
-          <span className='topbarLink'>Timeline</span>
-        </div>
         <div className='topbarIcons'>
-          <div className='topbarItemIcon'>
-            <Person />
-            <span className='topbarIconBadge'>1</span>
-          </div>
-          <div className='topbarItemIcon'>
-            <Chat />
-            <span className='topbarIconBadge'>1</span>
-          </div>
+          <Link
+            to='/messenger/'
+            style={{ textDecoration: 'none', color: 'inherit' }}
+          >
+            <div className='topbarItemIcon'>
+              <Chat />
+            </div>
+          </Link>
           <div
             className='topbarItemIcon'
             onClick={handleLogOut}
